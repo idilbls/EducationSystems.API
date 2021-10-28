@@ -19,3 +19,4 @@ C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystem
 C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.BusinessLogic\obj\Debug\net5.0\ref\EducationSystems.BusinessLogic.dll
 C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.BusinessLogic\obj\Debug\net5.0\EducationSystems.BusinessLogic.pdb
 C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.BusinessLogic\obj\Debug\net5.0\EducationSystems.BusinessLogic.genruntimeconfig.cache
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.BusinessLogic\obj\Debug\net5.0\EducationSystems.BusinessLogic.csproj.CopyComplete

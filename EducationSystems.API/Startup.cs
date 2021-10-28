@@ -1,14 +1,20 @@
+using Abp.Extensions;
+using EducationSystems.Core.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Linq;
 
 namespace EducationSystems.API
 {
     public class Startup
     {
+        private const string _defaultCorsPolicyName = "localhost";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -19,6 +25,21 @@ namespace EducationSystems.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+            services.AddDbContext<EducationSystemsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    _defaultCorsPolicyName,
+                    builder => builder
+                    .WithOrigins(Configuration["App:CorsOrigins"]
+                                .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                                .Select(o => o.RemovePostFix("/"))
+                                .ToArray())
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -40,6 +61,8 @@ namespace EducationSystems.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(_defaultCorsPolicyName);
 
             app.UseEndpoints(endpoints =>
             {
