@@ -1,0 +1,12 @@
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\bin\Debug\net5.0\EducationSystems.Models.deps.json
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\bin\Debug\net5.0\EducationSystems.Models.dll
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\bin\Debug\net5.0\ref\EducationSystems.Models.dll
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\bin\Debug\net5.0\EducationSystems.Models.pdb
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\obj\Debug\net5.0\EducationSystems.Models.csproj.AssemblyReference.cache
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\obj\Debug\net5.0\EducationSystems.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\obj\Debug\net5.0\EducationSystems.Models.AssemblyInfoInputs.cache
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\obj\Debug\net5.0\EducationSystems.Models.AssemblyInfo.cs
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\obj\Debug\net5.0\EducationSystems.Models.csproj.CoreCompileInputs.cache
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\obj\Debug\net5.0\EducationSystems.Models.dll
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\obj\Debug\net5.0\ref\EducationSystems.Models.dll
+C:\Users\Ehlullah.karakurt\Documents\GitHub\EducationSystems.API\EducationSystems.Models\obj\Debug\net5.0\EducationSystems.Models.pdb
