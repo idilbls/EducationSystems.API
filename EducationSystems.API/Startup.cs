@@ -1,15 +1,22 @@
 using Abp.Extensions;
+using EducationSystems.BusinessLogic.Abstract;
+using EducationSystems.BusinessLogic.Service;
 using EducationSystems.Core.Context;
 using EducationSystems.Core.EntityFrameworkCore;
+using EducationSystems.Models.Entities.IdentityAuth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Linq;
+using System.Text;
 
 namespace EducationSystems.API
 {
@@ -29,6 +36,35 @@ namespace EducationSystems.API
             services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<EducationSystemsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
+            services.AddScoped<IUserService, UserService>();
+            
+            // For Identity  
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<EducationSystemsDbContext>()
+                .AddDefaultTokenProviders();
+
+            // Adding Authentication  
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+
+            // Adding Jwt Bearer  
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["JWT:ValidAudience"],
+                    ValidIssuer = Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+                };
+            });
             services.AddCors(options =>
             {
                 options.AddPolicy(
@@ -62,6 +98,7 @@ namespace EducationSystems.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors(_defaultCorsPolicyName);

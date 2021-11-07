@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EducationSystems.BusinessLogic\EducationSystems.BusinessLogic.csproj" />
     <ProjectReference Include="..\EducationSystems.Core\EducationSystems.Core.csproj" />
     <ProjectReference Include="..\EducationSystems.Shared\EducationSystems.Shared.csproj" />
