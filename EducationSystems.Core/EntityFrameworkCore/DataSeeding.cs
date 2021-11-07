@@ -1,6 +1,6 @@
 ﻿using EducationSystems.Core.Context;
+using EducationSystems.Models.Entities.IdentityAuth;
 using EducationSystems.Models.Entities.Lessons;
-using EducationSystems.Models.Entities.Users;
 using EducationSystems.Models.Enums;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -20,21 +20,21 @@ namespace EducationSystems.Core.EntityFrameworkCore
             var context = scope.ServiceProvider.GetService<EducationSystemsDbContext>();
             context.Database.Migrate();
 
-            if (context.Users.Count() == 0)
-            {
-                context.Users.AddRangeAsync(
-                    new List<User>()
-                    {
-                    new User() { Name="Ahmet",Surname="Kızıl", Email= "a.kızıl@iku.edu.tr", Number= "1111111110", Password="123qwe", Type= UserType.professor},
-                    new User() { Name = "Zeynep", Surname = "Kızılkaya", Email = "a.kızılkaya@iku.edu.tr", Number = "1111111111", Password = "123qwe", Type = UserType.professor },
-                    new User() { Name = "Cem", Surname = "Solak", Email = "1700005280@stu.iku.edu.tr", Number = "1700005280", Password = "123qwe", Type = UserType.student },
-                    new User() { Name = "Kübra", Surname = "Aşık", Email = "1301020423@stu.iku.edu.tr", Number = "1301020423", Password = "123qwe", Type = UserType.student },
-                    new User() { Name = "Ehlullah", Surname = "Karakurt", Email = "1507010018@stu.iku.edu.tr", Number = "1507010018", Password = "123qwe", Type = UserType.student }
-                    }
-              );
-            }
+            //if (context.Users.Count() == 0)
+            //{
+            //    context.Users.AddRangeAsync(
+            //        new List<ApplicationUser>()
+            //        {
+            //        new ApplicationUser() { Name="Ahmet",Surname="Kızıl", Email= "a.kızıl@iku.edu.tr", Number= "1111111110", Password="123qwe", Type= UserType.professor},
+            //        new ApplicationUser() { Name = "Zeynep", Surname = "Kızılkaya", Email = "a.kızılkaya@iku.edu.tr", Number = "1111111111", Password = "123qwe", Type = UserType.professor },
+            //        new ApplicationUser() { Name = "Cem", Surname = "Solak", Email = "1700005280@stu.iku.edu.tr", Number = "1700005280", Password = "123qwe", Type = UserType.student },
+            //        new ApplicationUser() { Name = "Kübra", Surname = "Aşık", Email = "1301020423@stu.iku.edu.tr", Number = "1301020423", Password = "123qwe", Type = UserType.student },
+            //        new ApplicationUser() { Name = "Ehlullah", Surname = "Karakurt", Email = "1507010018@stu.iku.edu.tr", Number = "1507010018", Password = "123qwe", Type = UserType.student }
+            //        }
+            //  );
+            //}
 
-            if(context.Lessons.Count() == 0)
+            if (context.Lessons.Count() == 0)
             {
                 context.Lessons.AddRangeAsync
                     (
