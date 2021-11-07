@@ -1,5 +1,6 @@
 using Abp.Extensions;
 using EducationSystems.Core.Context;
+using EducationSystems.Core.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +57,7 @@ namespace EducationSystems.API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EducationSystems.API v1"));
+                DataSeeding.Seed(app);
             }
 
             app.UseRouting();
