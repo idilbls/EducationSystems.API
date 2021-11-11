@@ -1,6 +1,4 @@
-﻿
-
-using EducationSystems.BusinessLogic.Abstract;
+﻿using EducationSystems.BusinessLogic.Abstract;
 using EducationSystems.Models.Entities.IdentityAuth;
 using EducationSystems.Shared.DTOs.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -71,7 +69,11 @@ namespace EducationSystems.BusinessLogic.Service
             {
                 Email = request.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = request.Username
+                UserName = request.Username,
+                Name = request.Name,
+                Surname= request.Surname,
+                Number = request.Number,
+                Type = request.Type
             };
             var result = await _userManager.CreateAsync(user, request.Password);
             if (!result.Succeeded)
