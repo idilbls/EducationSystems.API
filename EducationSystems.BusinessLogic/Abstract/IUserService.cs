@@ -11,5 +11,6 @@ namespace EducationSystems.BusinessLogic.Abstract
     {
         Task<bool> Register(RegisterDto request);
         Task<LoginResponseDto> Login(LoginDto request);
+        Task<UserDto> GetUserById(int id);
     }
 }

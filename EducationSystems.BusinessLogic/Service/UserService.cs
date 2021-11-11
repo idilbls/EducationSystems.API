@@ -2,11 +2,13 @@
 using EducationSystems.Models.Entities.IdentityAuth;
 using EducationSystems.Shared.DTOs.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,28 @@ namespace EducationSystems.BusinessLogic.Service
         {
             _userManager = userManager;
             _configuration = configuration;
+        }
+
+        public async Task<UserDto> GetUserById(int id)
+        {
+            try
+            {
+                var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+                var userDto = new UserDto
+                {
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Number = user.Number,
+                    Type = user.Type
+                };
+
+                return userDto;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task<LoginResponseDto> Login(LoginDto request)

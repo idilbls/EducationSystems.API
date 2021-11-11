@@ -32,5 +32,11 @@ namespace EducationSystems.API.Controllers
         {
             return await _userService.Login(request);
         }
+
+        [HttpPost("getUserById")]
+        public async Task<UserDto> GetUserById([FromBody] int id)
+        {
+            return await _userService.GetUserById(id);
+        }
     }
 }
