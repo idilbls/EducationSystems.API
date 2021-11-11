@@ -36,10 +36,12 @@ namespace EducationSystems.API
             services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<EducationSystemsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
+           
+
             services.AddScoped<IUserService, UserService>();
             
             // For Identity  
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<EducationSystemsDbContext>()
                 .AddDefaultTokenProviders();
 

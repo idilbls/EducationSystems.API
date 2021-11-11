@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducationSystems.Core.Context
 {
-    public class EducationSystemsDbContext : IdentityDbContext<ApplicationUser>
+    public class EducationSystemsDbContext : IdentityDbContext<ApplicationUser,ApplicationRole, int>
     {
         public EducationSystemsDbContext(DbContextOptions<EducationSystemsDbContext> dbContext) : base(dbContext)
         {

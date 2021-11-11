@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EducationSystems.Models.Entities.IdentityAuth
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<int>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
