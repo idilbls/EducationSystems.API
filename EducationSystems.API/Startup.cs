@@ -39,6 +39,7 @@ namespace EducationSystems.API
            
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILessonService, LessonService>();
             
             // For Identity  
             services.AddIdentity<ApplicationUser, ApplicationRole>()

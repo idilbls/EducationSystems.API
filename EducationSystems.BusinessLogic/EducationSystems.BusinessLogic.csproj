@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EducationSystems.Core\EducationSystems.Core.csproj" />
     <ProjectReference Include="..\EducationSystems.Models\EducationSystems.Models.csproj" />
     <ProjectReference Include="..\EducationSystems.Shared\EducationSystems.Shared.csproj" />
   </ItemGroup>

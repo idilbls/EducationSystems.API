@@ -1,6 +1,7 @@
 ﻿using EducationSystems.Core.Context;
 using EducationSystems.Models.Entities.IdentityAuth;
 using EducationSystems.Models.Entities.Lessons;
+using EducationSystems.Models.Entities.Map;
 using EducationSystems.Models.Enums;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,57 @@ namespace EducationSystems.Core.EntityFrameworkCore
             //        }
             //  );
             //}
+
+            if (context.UserLessonMaps.Count() == 0)
+            {
+                context.UserLessonMaps.AddRangeAsync
+                (
+                    new List<UserLessonMap>()
+                    {
+                        new UserLessonMap(){UserId=3,LessonId=1,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=2,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=3,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=4,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=5,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=6,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=7,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=8,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=9,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=10,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=11,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=12,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=13,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=14,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=15,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=16,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=17,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=18,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=19,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=3,LessonId=20,StatusType=StatusType.Attendance},
+
+                        new UserLessonMap(){UserId=4,LessonId=1,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=2,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=3,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=4,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=5,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=6,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=7,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=8,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=9,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=10,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=11,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=12,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=13,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=14,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=15,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=16,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=17,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=18,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=19,StatusType=StatusType.Attendance},
+                        new UserLessonMap(){UserId=4,LessonId=20,StatusType=StatusType.Attendance},
+                    }
+                );
+            }
 
             if (context.Lessons.Count() == 0)
             {
