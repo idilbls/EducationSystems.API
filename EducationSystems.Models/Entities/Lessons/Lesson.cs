@@ -1,6 +1,8 @@
 ﻿using EducationSystems.Models.Entities.Core;
 using EducationSystems.Models.Entities.IdentityAuth;
+using EducationSystems.Models.Entities.Map;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EducationSystems.Models.Entities.Lessons
@@ -13,6 +15,6 @@ namespace EducationSystems.Models.Entities.Lessons
         public string Code { get; set; }
         public DateTime Date { get; set; }
         public int? ProfessorId { get; set; }
-
+        public List<UserLessonMap> UserLessonMaps { get; set; }
     }
 }

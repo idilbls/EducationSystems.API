@@ -72,14 +72,22 @@ namespace EducationSystems.BusinessLogic.Service
             return mappedLessons;
         }
 
-        public async Task<IList<UserLessonMapDto>> GetStudentLessons(int userId)
+        public async Task<IList<LessonDto>> GetStudentLessons(int userId)
         {
             try
             {
+                List<Lesson> lessons = new List<Lesson>();
                 var studentLessons = _context.UserLessonMaps.Where(u => u.UserId == userId).ToList();
+
+                foreach (var lesson in studentLessons)
+                {
+                    var value = await _context.Lessons.FindAsync(lesson.LessonId);
+                    lessons.Add(value);
+                }
                
-                var groupedLessonList = studentLessons.GroupBy(u => u.Lesson.Code).Select(grp => grp.First()).ToList();
-                var mappedLessons = _mapper.Map<List<UserLessonMap>,IList<UserLessonMapDto>>(groupedLessonList);
+
+                var groupedLessonList = lessons.GroupBy(u => u.Code).Select(grp => grp.First()).ToList();
+                var mappedLessons = _mapper.Map<List<Lesson>,IList<LessonDto>>(groupedLessonList);
                 return mappedLessons;
             }
             catch (Exception ex)
