@@ -20,10 +20,28 @@ namespace EducationSystems.API.Controllers
             _lessonService = lessonService;
         }
 
-        [HttpPost("getStudentLessons")]
-        public async Task<IList<LessonDto>> GetStudentLessons([FromBody] int userId)
+        [HttpPost("get_student_lessons")]
+        public async Task<IList<UserLessonMapDto>> GetStudentLessons([FromBody] int userId)
         {
             return await _lessonService.GetStudentLessons(userId);
+        }
+
+        [HttpPost("get_proffesor_lessons")]
+        public async Task<IList<LessonDto>> GetProffesorLessons([FromBody] int userId)
+        {
+            return await _lessonService.GetProffesorLessons(userId);
+        }
+
+        [HttpPost("get_lessons_sections")]
+        public async Task<IList<LessonDto>> GetLessonsSections(SectionRequestDto sectionRequest)
+        {
+            return await _lessonService.GetLessonsSections(sectionRequest);
+        }
+
+        [HttpPost("get_proffesor_lesson_sections")]
+        public async Task<IList<LessonDto>> GetProffesorLessonsSections(SectionRequestDto sectionRequest)
+        {
+            return await _lessonService.GetProffesorLessonsSections(sectionRequest);
         }
     }
 }

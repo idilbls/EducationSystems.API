@@ -2,11 +2,11 @@
 using EducationSystems.BusinessLogic.Abstract;
 using EducationSystems.Core.Context;
 using EducationSystems.Models.Entities.Lessons;
+using EducationSystems.Models.Entities.Map;
 using EducationSystems.Shared.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EducationSystems.BusinessLogic.Service
@@ -27,38 +27,60 @@ namespace EducationSystems.BusinessLogic.Service
             throw new NotImplementedException();
         }
 
-        public Task<IList<UserLessonMapDto>> GetLessonsSections(SectionRequestDto sectionRequest)
+        public async Task<IList<LessonDto>> GetLessonsSections(SectionRequestDto sectionRequest)
         {
-            throw new NotImplementedException();
+            List<Lesson> lessons = new List<Lesson>();
+            var lessonSections = _context.UserLessonMaps
+                .Where(s => s.UserId == sectionRequest.userId && s.Lesson.Code == sectionRequest.LessonCode).ToList();
+
+            foreach (var lesson in lessonSections)
+            {
+                var value = await _context.Lessons.FindAsync(lesson.LessonId);
+                lessons.Add(value);
+            }
+
+            var mappedLessons = _mapper.Map<List<Lesson>, IList<LessonDto>>(lessons);
+            return mappedLessons;
         }
 
-        public Task<IList<LessonDto>> GetProffesorLessons(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IList<LessonDto>> GetProffesorLessonsSections(SectionRequestDto sectionRequest)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IList<LessonDto>> GetStudentLessons(int userId)
+        public async Task<IList<LessonDto>> GetProffesorLessons(int userId)
         {
             try
             {
                 List<Lesson> lessons = new List<Lesson>();
 
-                var studentLessons = _context.UserLessonMaps.Where(u => u.UserId == userId).ToList();
-                foreach (var item in studentLessons)
-                {
-                    var value = await _context.Lessons.FindAsync(item.LessonId);
-                    lessons.Add(value);
-                }
-                var userLesson = lessons.Distinct().ToList();
-                var mappedLessons = _mapper.Map<IList<Lesson>, List<LessonDto>>(userLesson);
+                var proffesorLessons = _context.Lessons.Where(u => u.ProfessorId == userId).ToList();
+                
+                var groupedLessonList = proffesorLessons.GroupBy(u => u.Code).Select(grp => grp.First()).ToList();
+                var mappedLessons = _mapper.Map<List<Lesson>, IList<LessonDto>>(groupedLessonList);
                 return mappedLessons;
+            }
+            catch (Exception ex)
+            {
 
-                //Code a göre tekilleştirmemiz gerekiyor. Yoksa tüm dersleri getiriyor.
+                throw ex;
+            }
+        }
+
+        public async Task<IList<LessonDto>> GetProffesorLessonsSections(SectionRequestDto sectionRequest)
+        {
+ 
+            var lessonSections = _context.Lessons
+                .Where(s => s.ProfessorId == sectionRequest.userId && s.Code == sectionRequest.LessonCode).ToList();
+
+            var mappedLessons = _mapper.Map<List<Lesson>, IList<LessonDto>>(lessonSections);
+            return mappedLessons;
+        }
+
+        public async Task<IList<UserLessonMapDto>> GetStudentLessons(int userId)
+        {
+            try
+            {
+                var studentLessons = _context.UserLessonMaps.Where(u => u.UserId == userId).ToList();
+               
+                var groupedLessonList = studentLessons.GroupBy(u => u.Lesson.Code).Select(grp => grp.First()).ToList();
+                var mappedLessons = _mapper.Map<List<UserLessonMap>,IList<UserLessonMapDto>>(groupedLessonList);
+                return mappedLessons;
             }
             catch (Exception ex)
             {
