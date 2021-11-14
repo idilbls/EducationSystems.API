@@ -12,10 +12,10 @@ namespace EducationSystems.Models.Entities.Map
 
         public int? UserId { get; set; }
 
+        public int? LessonId { get; set; }
+
         [ForeignKey("LessonId")]
         public Lesson Lesson { get; set; }
-
-        public int? LessonId { get; set; }
 
         public StatusType StatusType { get; set; }
     }

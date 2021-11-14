@@ -22,9 +22,23 @@ namespace EducationSystems.BusinessLogic.Service
             _mapper = mapper;
         }
 
-        public Task<IList<UserLessonMapDto>> GetLessonsAttendance(int lessonId)
+        public async Task<IList<StudentAttendanceResponse>> GetLessonsAttendance(int lessonId)
         {
-            throw new NotImplementedException();
+            List<StudentAttendanceResponse> studentAttendanceResponse = new List<StudentAttendanceResponse>();
+
+            var studentAttendances = _context.UserLessonMaps.Where(x => x.LessonId == lessonId).ToList();
+            foreach (var item in studentAttendances)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == item.UserId);
+                studentAttendanceResponse.Add(new StudentAttendanceResponse 
+                {
+                    Number = user.Number,
+                    FullName = user.Name + user.Surname,
+                    StatusType = item.StatusType
+                });
+            }
+
+            return studentAttendanceResponse;
         }
 
         public async Task<IList<UserLessonMapDto>> GetLessonsSections(SectionRequestDto sectionRequest)
@@ -34,6 +48,8 @@ namespace EducationSystems.BusinessLogic.Service
 
             var mappedLessons = _mapper.Map<List<UserLessonMap>, IList<UserLessonMapDto>>(lessonSections);
             return mappedLessons;
+            // burda aklıma bir fikir geldi GetLessonsAttendancedeki gibi bitane response dto yapıp onun türünden döndürürsek 
+            //lessonların adını da çekebiliriz
         }
 
         public async Task<IList<LessonDto>> GetProffesorLessons(int userId)
@@ -90,9 +106,25 @@ namespace EducationSystems.BusinessLogic.Service
             }
         }
 
-        public Task<bool> UpdateStudentAttendance(UserLessonMapRequest request)
+        public async Task<bool> UpdateStudentAttendance(UserLessonMapRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var studentAttendance = _context.UserLessonMaps.FirstOrDefault(x => x.Id == request.UserLessonMapId);
+
+                studentAttendance.StatusType = request.StatusType;
+
+                _context.UserLessonMaps.Update(studentAttendance);
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
     }
 }

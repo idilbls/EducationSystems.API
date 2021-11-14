@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducationSystems.Core.Migrations
 {
     [DbContext(typeof(EducationSystemsDbContext))]
-    [Migration("20211111111635_initial")]
+    [Migration("20211114131709_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -292,7 +292,7 @@ namespace EducationSystems.Core.Migrations
             modelBuilder.Entity("EducationSystems.Models.Entities.Map.UserLessonMap", b =>
                 {
                     b.HasOne("EducationSystems.Models.Entities.Lessons.Lesson", "Lesson")
-                        .WithMany()
+                        .WithMany("UserLessonMaps")
                         .HasForeignKey("LessonId");
 
                     b.Navigation("Lesson");
@@ -347,6 +347,11 @@ namespace EducationSystems.Core.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EducationSystems.Models.Entities.Lessons.Lesson", b =>
+                {
+                    b.Navigation("UserLessonMaps");
                 });
 #pragma warning restore 612, 618
         }
