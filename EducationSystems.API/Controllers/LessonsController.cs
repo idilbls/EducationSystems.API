@@ -33,7 +33,7 @@ namespace EducationSystems.API.Controllers
         }
 
         [HttpPost("get_lessons_sections")]
-        public async Task<IList<LessonDto>> GetLessonsSections(SectionRequestDto sectionRequest)
+        public async Task<IList<UserLessonMapDto>> GetLessonsSections(SectionRequestDto sectionRequest)
         {
             return await _lessonService.GetLessonsSections(sectionRequest);
         }

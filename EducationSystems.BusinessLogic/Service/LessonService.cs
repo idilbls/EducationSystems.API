@@ -27,19 +27,12 @@ namespace EducationSystems.BusinessLogic.Service
             throw new NotImplementedException();
         }
 
-        public async Task<IList<LessonDto>> GetLessonsSections(SectionRequestDto sectionRequest)
+        public async Task<IList<UserLessonMapDto>> GetLessonsSections(SectionRequestDto sectionRequest)
         {
-            List<Lesson> lessons = new List<Lesson>();
             var lessonSections = _context.UserLessonMaps
                 .Where(s => s.UserId == sectionRequest.userId && s.Lesson.Code == sectionRequest.LessonCode).ToList();
 
-            foreach (var lesson in lessonSections)
-            {
-                var value = await _context.Lessons.FindAsync(lesson.LessonId);
-                lessons.Add(value);
-            }
-
-            var mappedLessons = _mapper.Map<List<Lesson>, IList<LessonDto>>(lessons);
+            var mappedLessons = _mapper.Map<List<UserLessonMap>, IList<UserLessonMapDto>>(lessonSections);
             return mappedLessons;
         }
 
