@@ -86,7 +86,8 @@ namespace EducationSystems.BusinessLogic.Service
                 return (new LoginResponseDto() { 
                     AccessToken= new JwtSecurityTokenHandler().WriteToken(token),
                     FullName = user.Name + user.Surname,
-                    Id= user.Id
+                    Id= user.Id,
+                    UserType = user.Type
                 });
             }
             return new LoginResponseDto();

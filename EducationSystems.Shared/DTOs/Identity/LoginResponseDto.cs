@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EducationSystems.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace EducationSystems.Shared.DTOs.Identity
         public int Id { get; set; }
         public string FullName { get; set; }
         public string AccessToken { get; set; }
+        public UserType UserType { get; set; }
     }
 }
