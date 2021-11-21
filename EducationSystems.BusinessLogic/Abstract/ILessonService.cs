@@ -9,7 +9,7 @@ namespace EducationSystems.BusinessLogic.Abstract
 {
     public interface ILessonService
     {
-        Task<IList<LessonDto>> GetStudentLessons(int userId);
+        Task<LessonListResponse> GetStudentLessons(int userId);
         Task<IList<LessonDto>> GetProffesorLessons(int userId);
         Task<IList<LessonsSectionsResponse>> GetLessonsSections(SectionRequestDto sectionRequest);
         Task<bool> UpdateStudentAttendance(UserLessonMapRequest request);
