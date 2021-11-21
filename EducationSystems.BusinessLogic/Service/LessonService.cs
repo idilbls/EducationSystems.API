@@ -41,15 +41,31 @@ namespace EducationSystems.BusinessLogic.Service
             return studentAttendanceResponse;
         }
 
-        public async Task<IList<UserLessonMapDto>> GetLessonsSections(SectionRequestDto sectionRequest)
+        public async Task<IList<LessonsSectionsResponse>> GetLessonsSections(SectionRequestDto sectionRequest)
         {
+            List<LessonsSectionsResponse> lessonsSectionsResponses = new List<LessonsSectionsResponse>();
             var lessonSections = _context.UserLessonMaps
                 .Where(s => s.UserId == sectionRequest.userId && s.Lesson.Code == sectionRequest.LessonCode).ToList();
 
-            var mappedLessons = _mapper.Map<List<UserLessonMap>, IList<UserLessonMapDto>>(lessonSections);
-            return mappedLessons;
-            // burda aklıma bir fikir geldi GetLessonsAttendancedeki gibi bitane response dto yapıp onun türünden döndürürsek 
-            //lessonların adını da çekebiliriz
+            foreach (var item in lessonSections)
+            {
+                var lessonInfo = _context.Lessons.Where(c => c.Id == item.LessonId).FirstOrDefault();
+
+                if(lessonInfo != null) 
+                {
+                    lessonsSectionsResponses.Add(new LessonsSectionsResponse
+                    {
+                        UserId = item.UserId,
+                        LessonCode = lessonInfo.Code,
+                        LessonTitle = lessonInfo.Title,
+                        LessonDate = lessonInfo.Date,
+                        StatusType = item.StatusType
+
+                    });
+                }
+
+            }
+            return lessonsSectionsResponses;
         }
 
         public async Task<IList<LessonDto>> GetProffesorLessons(int userId)

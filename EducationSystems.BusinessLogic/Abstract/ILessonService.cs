@@ -11,7 +11,7 @@ namespace EducationSystems.BusinessLogic.Abstract
     {
         Task<IList<LessonDto>> GetStudentLessons(int userId);
         Task<IList<LessonDto>> GetProffesorLessons(int userId);
-        Task<IList<UserLessonMapDto>> GetLessonsSections(SectionRequestDto sectionRequest);
+        Task<IList<LessonsSectionsResponse>> GetLessonsSections(SectionRequestDto sectionRequest);
         Task<bool> UpdateStudentAttendance(UserLessonMapRequest request);
         Task<IList<LessonDto>> GetProffesorLessonsSections(SectionRequestDto sectionRequest);
         Task<IList<StudentAttendanceResponse>> GetLessonsAttendance(int lessonId);
