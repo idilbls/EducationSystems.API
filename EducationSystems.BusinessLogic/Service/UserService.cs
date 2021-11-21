@@ -31,17 +31,22 @@ namespace EducationSystems.BusinessLogic.Service
             try
             {
                 var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
-                var userDto = new UserDto
+                if(user != null)
                 {
-                    Id=user.Id,
-                    Username=user.UserName,
-                    Name = user.Name,
-                    Surname = user.Surname,
-                    Number = user.Number,
-                    Type = user.Type
-                };
+                    var userDto = new UserDto
+                    {
+                        Id = user.Id,
+                        Username = user.UserName,
+                        Name = user.Name,
+                        Surname = user.Surname,
+                        Number = user.Number,
+                        Type = user.Type
+                    };
+                    return userDto;
+                }
 
-                return userDto;
+                return new UserDto();
+
             }
             catch (Exception ex)
             {
@@ -80,7 +85,8 @@ namespace EducationSystems.BusinessLogic.Service
 
                 return (new LoginResponseDto() { 
                     AccessToken= new JwtSecurityTokenHandler().WriteToken(token),
-                    FullName = user.Name + user.Surname
+                    FullName = user.Name + user.Surname,
+                    Id= user.Id
                 });
             }
             return new LoginResponseDto();

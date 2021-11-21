@@ -8,6 +8,7 @@ namespace EducationSystems.Shared.DTOs.Identity
 {
     public class LoginResponseDto
     {
+        public int Id { get; set; }
         public string FullName { get; set; }
         public string AccessToken { get; set; }
     }
