@@ -33,6 +33,8 @@ namespace EducationSystems.BusinessLogic.Service
                 var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
                 var userDto = new UserDto
                 {
+                    Id=user.Id,
+                    Username=user.UserName,
                     Name = user.Name,
                     Surname = user.Surname,
                     Number = user.Number,
