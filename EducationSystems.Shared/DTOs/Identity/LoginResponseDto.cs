@@ -11,6 +11,7 @@ namespace EducationSystems.Shared.DTOs.Identity
     {
         public int Id { get; set; }
         public string FullName { get; set; }
+        public string Number { get; set; }
         public string AccessToken { get; set; }
         public UserType UserType { get; set; }
     }
