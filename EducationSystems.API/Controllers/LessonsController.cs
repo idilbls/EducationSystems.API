@@ -27,7 +27,7 @@ namespace EducationSystems.API.Controllers
         }
 
         [HttpPost("get_proffesor_lessons")]
-        public async Task<IList<LessonDto>> GetProffesorLessons([FromBody] int userId)
+        public async Task<LessonListResponse> GetProffesorLessons([FromBody] int userId)
         {
             return await _lessonService.GetProffesorLessons(userId);
         }

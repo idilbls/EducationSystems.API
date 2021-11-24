@@ -68,7 +68,7 @@ namespace EducationSystems.BusinessLogic.Service
             return lessonsSectionsResponses;
         }
 
-        public async Task<IList<LessonDto>> GetProffesorLessons(int userId)
+        public async Task<LessonListResponse> GetProffesorLessons(int userId)
         {
             try
             {
@@ -77,8 +77,10 @@ namespace EducationSystems.BusinessLogic.Service
                 var proffesorLessons = _context.Lessons.Where(u => u.ProfessorId == userId).ToList();
                 
                 var groupedLessonList = proffesorLessons.GroupBy(u => u.Code).Select(grp => grp.First()).ToList();
-                var mappedLessons = _mapper.Map<List<Lesson>, IList<LessonDto>>(groupedLessonList);
-                return mappedLessons;
+                var mappedLessons = _mapper.Map<List<Lesson>, List<LessonDto>>(groupedLessonList);
+
+                var lessonList = new LessonListResponse() { Lessons = mappedLessons };
+                return lessonList;
             }
             catch (Exception ex)
             {
