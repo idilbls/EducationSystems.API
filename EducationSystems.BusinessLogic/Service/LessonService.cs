@@ -22,7 +22,7 @@ namespace EducationSystems.BusinessLogic.Service
             _mapper = mapper;
         }
 
-        public async Task<IList<StudentAttendanceResponse>> GetLessonsAttendance(int lessonId)
+        public async Task<StudentAttendanceListResponse> GetLessonsAttendance(int lessonId)
         {
             List<StudentAttendanceResponse> studentAttendanceResponse = new List<StudentAttendanceResponse>();
 
@@ -37,11 +37,11 @@ namespace EducationSystems.BusinessLogic.Service
                     StatusType = item.StatusType
                 });
             }
-
-            return studentAttendanceResponse;
+            var attendanceList = new StudentAttendanceListResponse() { StudentAttendances = studentAttendanceResponse };
+            return attendanceList;
         }
 
-        public async Task<IList<LessonsSectionsResponse>> GetLessonsSections(SectionRequestDto sectionRequest)
+        public async Task<LessonSectionsListResponse> GetLessonsSections(SectionRequestDto sectionRequest)
         {
             List<LessonsSectionsResponse> lessonsSectionsResponses = new List<LessonsSectionsResponse>();
             var lessonSections = _context.UserLessonMaps
@@ -65,10 +65,11 @@ namespace EducationSystems.BusinessLogic.Service
                 }
 
             }
-            return lessonsSectionsResponses;
+            var lessonList = new LessonSectionsListResponse() { Lessons = lessonsSectionsResponses };
+            return lessonList;
         }
 
-        public async Task<IList<LessonDto>> GetProffesorLessons(int userId)
+        public async Task<LessonListResponse> GetProffesorLessons(int userId)
         {
             try
             {
@@ -77,8 +78,10 @@ namespace EducationSystems.BusinessLogic.Service
                 var proffesorLessons = _context.Lessons.Where(u => u.ProfessorId == userId).ToList();
                 
                 var groupedLessonList = proffesorLessons.GroupBy(u => u.Code).Select(grp => grp.First()).ToList();
-                var mappedLessons = _mapper.Map<List<Lesson>, IList<LessonDto>>(groupedLessonList);
-                return mappedLessons;
+                var mappedLessons = _mapper.Map<List<Lesson>, List<LessonDto>>(groupedLessonList);
+
+                var lessonList = new LessonListResponse() { Lessons = mappedLessons };
+                return lessonList;
             }
             catch (Exception ex)
             {
@@ -87,14 +90,16 @@ namespace EducationSystems.BusinessLogic.Service
             }
         }
 
-        public async Task<IList<LessonDto>> GetProffesorLessonsSections(SectionRequestDto sectionRequest)
+        public async Task<LessonListResponse> GetProffesorLessonsSections(SectionRequestDto sectionRequest)
         {
  
             var lessonSections = _context.Lessons
                 .Where(s => s.ProfessorId == sectionRequest.userId && s.Code == sectionRequest.LessonCode).ToList();
 
-            var mappedLessons = _mapper.Map<List<Lesson>, IList<LessonDto>>(lessonSections);
-            return mappedLessons;
+            var mappedLessons = _mapper.Map<List<Lesson>, List<LessonDto>>(lessonSections);
+
+            var lessonList = new LessonListResponse() { Lessons = mappedLessons };
+            return lessonList;
         }
 
         public async Task<LessonListResponse> GetStudentLessons(int userId)

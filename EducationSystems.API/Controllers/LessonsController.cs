@@ -27,19 +27,19 @@ namespace EducationSystems.API.Controllers
         }
 
         [HttpPost("get_proffesor_lessons")]
-        public async Task<IList<LessonDto>> GetProffesorLessons([FromBody] int userId)
+        public async Task<LessonListResponse> GetProffesorLessons([FromBody] int userId)
         {
             return await _lessonService.GetProffesorLessons(userId);
         }
 
         [HttpPost("get_lessons_sections")]
-        public async Task<IList<LessonsSectionsResponse>> GetLessonsSections([FromBody] SectionRequestDto sectionRequest)
+        public async Task<LessonSectionsListResponse> GetLessonsSections([FromBody] SectionRequestDto sectionRequest)
         {
             return await _lessonService.GetLessonsSections(sectionRequest);
         }
 
         [HttpPost("get_proffesor_lesson_sections")]
-        public async Task<IList<LessonDto>> GetProffesorLessonsSections([FromBody] SectionRequestDto sectionRequest)
+        public async Task<LessonListResponse> GetProffesorLessonsSections([FromBody] SectionRequestDto sectionRequest)
         {
             return await _lessonService.GetProffesorLessonsSections(sectionRequest);
         }
@@ -51,7 +51,7 @@ namespace EducationSystems.API.Controllers
         }
 
         [HttpPost("get_lessons_attendance")]
-        public async Task<IList<StudentAttendanceResponse>> GetLessonsAttendance([FromBody] int lessonId)
+        public async Task<StudentAttendanceListResponse> GetLessonsAttendance([FromBody] int lessonId)
         {
             return await _lessonService.GetLessonsAttendance(lessonId);
         }

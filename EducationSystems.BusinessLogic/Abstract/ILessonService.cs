@@ -10,10 +10,10 @@ namespace EducationSystems.BusinessLogic.Abstract
     public interface ILessonService
     {
         Task<LessonListResponse> GetStudentLessons(int userId);
-        Task<IList<LessonDto>> GetProffesorLessons(int userId);
-        Task<IList<LessonsSectionsResponse>> GetLessonsSections(SectionRequestDto sectionRequest);
+        Task<LessonListResponse> GetProffesorLessons(int userId);
+        Task<LessonSectionsListResponse> GetLessonsSections(SectionRequestDto sectionRequest);
         Task<bool> UpdateStudentAttendance(UserLessonMapRequest request);
-        Task<IList<LessonDto>> GetProffesorLessonsSections(SectionRequestDto sectionRequest);
-        Task<IList<StudentAttendanceResponse>> GetLessonsAttendance(int lessonId);
+        Task<LessonListResponse> GetProffesorLessonsSections(SectionRequestDto sectionRequest);
+        Task<StudentAttendanceListResponse> GetLessonsAttendance(int lessonId);
     }
 }
