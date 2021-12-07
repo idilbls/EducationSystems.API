@@ -33,7 +33,7 @@ namespace EducationSystems.BusinessLogic.Service
                 studentAttendanceResponse.Add(new StudentAttendanceResponse 
                 {
                     Number = user.Number,
-                    FullName = user.Name + user.Surname,
+                    FullName = user.Name +" "+ user.Surname,
                     StatusType = item.StatusType
                 });
             }
@@ -59,7 +59,8 @@ namespace EducationSystems.BusinessLogic.Service
                         LessonCode = lessonInfo.Code,
                         LessonTitle = lessonInfo.Title,
                         LessonDate = lessonInfo.Date,
-                        StatusType = item.StatusType
+                        StatusType = item.StatusType,
+                        UserLessonMapId = item.Id                   
 
                     });
                 }
