@@ -67,5 +67,11 @@ namespace EducationSystems.API.Controllers
         {
             return await _lessonService.StartLesson(lessonId);
         }
+
+        [HttpPost("get_lesson_by_id")]
+        public async Task<LessonDto> GetLessonById([FromBody] int lessonId)
+        {
+            return await _lessonService.GetLessonById(lessonId);
+        }
     }
 }

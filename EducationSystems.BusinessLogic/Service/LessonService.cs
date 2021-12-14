@@ -60,7 +60,9 @@ namespace EducationSystems.BusinessLogic.Service
                         LessonTitle = lessonInfo.Title,
                         LessonDate = lessonInfo.Date,
                         StatusType = item.StatusType,
-                        UserLessonMapId = item.Id                   
+                        UserLessonMapId = item.Id,
+                        LessonId = item.LessonId,
+                        ProfessorId = lessonInfo.ProfessorId                      
 
                     });
                 }
@@ -199,6 +201,21 @@ namespace EducationSystems.BusinessLogic.Service
 
                 await _context.SaveChangesAsync();
                 return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<LessonDto> GetLessonById(int lessonId)
+        {
+            try
+            {
+                var lesson = _context.Lessons.FirstOrDefault(x => x.Id == lessonId);
+                var mappedLessons = _mapper.Map<Lesson, LessonDto>(lesson);
+                return mappedLessons;
             }
             catch (Exception ex)
             {

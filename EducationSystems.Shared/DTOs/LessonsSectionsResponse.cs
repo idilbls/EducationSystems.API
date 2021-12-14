@@ -9,6 +9,8 @@ namespace EducationSystems.Shared.DTOs
 {
     public class LessonsSectionsResponse
     {
+        public int? LessonId { get; set; }
+        public int? ProfessorId { get; set; }
         public int UserLessonMapId { get; set; }
         public int? UserId { get; set; }
         public string LessonTitle { get; set; }
