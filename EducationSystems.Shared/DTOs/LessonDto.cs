@@ -13,5 +13,6 @@ namespace EducationSystems.Shared.DTOs
         public string Code { get; set; }
         public DateTime Date { get; set; }
         public int? ProfessorId { get; set; }
+        public bool IsActive { get; set; }
     }
 }
