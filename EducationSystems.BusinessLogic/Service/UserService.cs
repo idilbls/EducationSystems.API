@@ -41,7 +41,8 @@ namespace EducationSystems.BusinessLogic.Service
                         Name = user.Name,
                         Surname = user.Surname,
                         Number = user.Number,
-                        Type = user.Type
+                        Type = user.Type,
+                        LocalAddress = user.LocalAddress
                     };
                     return userDto;
                 }
