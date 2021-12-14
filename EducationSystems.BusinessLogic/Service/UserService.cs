@@ -1,5 +1,6 @@
 ﻿using EducationSystems.BusinessLogic.Abstract;
 using EducationSystems.Models.Entities.IdentityAuth;
+using EducationSystems.Shared.DTOs;
 using EducationSystems.Shared.DTOs.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -113,6 +114,35 @@ namespace EducationSystems.BusinessLogic.Service
             if (!result.Succeeded)
                 return false;
             return true;
+        }
+
+        public async Task<bool> UpdateLocalAddress(LocalAddressRequest request)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(e => e.Id == request.UserId);
+            if(user != null)
+            {
+                if(user.LocalAddress != null)
+                {
+                    if(user.LocalAddress != request.LocalAddress)
+                    {
+                        user.LocalAddress = request.LocalAddress;
+                        var result = await _userManager.UpdateAsync(user);
+                        if (!result.Succeeded)
+                            return false;
+                        return true;
+                    }
+                }
+                else
+                {
+                    user.LocalAddress = request.LocalAddress;
+                    var result = await _userManager.UpdateAsync(user);
+                    if (!result.Succeeded)
+                        return false;
+                    return true;
+                }
+            }
+            return true;
+
         }
     }
 }

@@ -10,5 +10,6 @@ namespace EducationSystems.Shared.DTOs.Identity
         public string Surname { get; set; }
         public string Number { get; set; }
         public UserType Type { get; set; }
+        public string? LocalAddress { get; set; }
     }
 }

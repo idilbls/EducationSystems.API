@@ -55,5 +55,11 @@ namespace EducationSystems.API.Controllers
         {
             return await _lessonService.GetLessonsAttendance(lessonId);
         }
+
+        [HttpPost("finish_lesson")]
+        public async Task<bool> FinishLesson([FromBody] int lessonId)
+        {
+            return await _lessonService.FinishLesson(lessonId);
+        }
     }
 }

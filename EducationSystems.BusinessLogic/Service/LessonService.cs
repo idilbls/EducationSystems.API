@@ -150,5 +150,30 @@ namespace EducationSystems.BusinessLogic.Service
             }
 
         }
+
+        public async Task<bool> FinishLesson(int lessonId)
+        {
+            try
+            {
+                var studentAttendanceList = _context.UserLessonMaps.Where(x => x.LessonId == lessonId).ToList();
+                if(studentAttendanceList != null) { 
+                    foreach (var studentAttendance in studentAttendanceList)
+                    {
+                        if(studentAttendance.StatusType == Models.Enums.StatusType.Attendance)
+                        {
+                            studentAttendance.StatusType = Models.Enums.StatusType.Absent;
+                            _context.UserLessonMaps.Update(studentAttendance);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

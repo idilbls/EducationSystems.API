@@ -1,4 +1,5 @@
-﻿using EducationSystems.Shared.DTOs.Identity;
+﻿using EducationSystems.Shared.DTOs;
+using EducationSystems.Shared.DTOs.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace EducationSystems.BusinessLogic.Abstract
         Task<bool> Register(RegisterDto request);
         Task<LoginResponseDto> Login(LoginDto request);
         Task<UserDto> GetUserById(int id);
+        Task<bool> UpdateLocalAddress(LocalAddressRequest request);
     }
 }
