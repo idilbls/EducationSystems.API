@@ -61,5 +61,11 @@ namespace EducationSystems.API.Controllers
         {
             return await _lessonService.FinishLesson(lessonId);
         }
+
+        [HttpPost("start_lesson")]
+        public async Task<bool> StartLesson([FromBody] int lessonId)
+        {
+            return await _lessonService.StartLesson(lessonId);
+        }
     }
 }

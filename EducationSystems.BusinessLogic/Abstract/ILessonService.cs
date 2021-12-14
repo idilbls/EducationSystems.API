@@ -16,5 +16,6 @@ namespace EducationSystems.BusinessLogic.Abstract
         Task<LessonListResponse> GetProffesorLessonsSections(SectionRequestDto sectionRequest);
         Task<StudentAttendanceListResponse> GetLessonsAttendance(int lessonId);
         Task<bool> FinishLesson(int lessonId);
+        Task<bool> StartLesson(int lessonId);
     }
 }

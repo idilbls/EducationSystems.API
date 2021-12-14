@@ -10,7 +10,7 @@ namespace EducationSystems.Models.Entities.Core
     {
         public BaseEntity()
         {
-            this.IsActive = true;
+            this.IsActive = false;
             this.CreationTime = DateTime.Now;
         }
 

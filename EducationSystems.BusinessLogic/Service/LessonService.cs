@@ -136,12 +136,19 @@ namespace EducationSystems.BusinessLogic.Service
             {
                 var studentAttendance = _context.UserLessonMaps.FirstOrDefault(x => x.Id == request.UserLessonMapId);
 
-                studentAttendance.StatusType = request.StatusType;
+                var lesson = _context.Lessons.FirstOrDefault(x => x.Id == studentAttendance.LessonId);
+                if (lesson.IsActive == true)
+                {
+                    studentAttendance.StatusType = request.StatusType;
 
-                _context.UserLessonMaps.Update(studentAttendance);
+                    _context.UserLessonMaps.Update(studentAttendance);
 
-                await _context.SaveChangesAsync();
-                return true;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                else
+                    return false;
+
             }
             catch (Exception ex)
             {
@@ -166,7 +173,31 @@ namespace EducationSystems.BusinessLogic.Service
                             await _context.SaveChangesAsync();
                         }
                     }
+                    var lesson = _context.Lessons.FirstOrDefault(x => x.Id == lessonId);
+                    lesson.IsActive = false;
+                    _context.Lessons.Update(lesson);
+                    await _context.SaveChangesAsync();
                 }
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<bool> StartLesson(int lessonId)
+        {
+            try
+            {
+                var lesson = _context.Lessons.FirstOrDefault(x => x.Id == lessonId);
+
+                lesson.IsActive = true;
+
+                _context.Lessons.Update(lesson);
+
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
